@@ -1,0 +1,31 @@
+@startuml
+class Usuario {
+    - nombreUsuario: String
+    - contraseña: String
+    - edad: int
+    - emparejado: boolean
+    - pareja: usuario
+    - solicitudesEnviadas: List<SolicitudEmparejamiento>
+    - solicitudesRecibidas: List<SolicitudEmparejamiento>
+    + enviarSolicitud(receptor: Usuario): void
+    + recibirSolicitud(solicitud: SolicitudEmparejamiento): void
+    + rechazarSolicitud(solicitud: SolicitudEmparejamiento): void
+    + cancelarEmparejamiento(): void
+    + cerrarSesion(): void
+}
+
+class SolicitudEmparejamiento {
+    - emisor: usuario
+    - receptor: usuario
+    - estado: estadoSolicitud
+}
+class EstadoSolicitud {
+    - pendiente
+    - aceptada
+    - rechazada
+}
+Usuario"1" -- "1" Usuario: relacion
+Usuario"1..*" -- "1" SolicitudEmparejamiento: solicitud enviada >
+Usuario"1..*" -- "1" SolicitudEmparejamiento: solicitud recibida >
+SolicitudEmparejamiento"1" -- "1..*" Usuario
+@enduml

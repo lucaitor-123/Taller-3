@@ -1,0 +1,24 @@
+@startuml
+entity Usuario {
+    nombre de Usuario
+    contraseña
+    edad
+    emparejado
+    pareja
+}
+entity SolicitudEmparejamiento as "solicitud de emparejamiento"{
+           emisor
+           receptor
+           estado
+}
+
+entity EstadoSolicitud {
+    pendiente
+    aceptada
+    rechazada
+}
+Usuario"1" -- "1" Usuario: relacion
+Usuario"1..*" -- "1" SolicitudEmparejamiento: solicitud enviada >
+Usuario"1..*" -- "1" SolicitudEmparejamiento: solicitud recibida >
+SolicitudEmparejamiento"1" -- "1..*" Usuario
+@enduml
